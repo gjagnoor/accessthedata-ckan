@@ -1,5 +1,4 @@
-FROM solr:6.2-alpine
-MAINTAINER Open Knowledge
+FROM solr:latest
 
 # Enviroment
 ENV SOLR_CORE ckan

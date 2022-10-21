@@ -13,7 +13,7 @@ cd ckan
 export latest_ckan_release_branch=`git branch --all | grep remotes/origin/release-v | sort -r | sed 's/remotes\/origin\///g' | head -n 1`
 echo "CKAN branch: $latest_ckan_release_branch"
 git checkout $latest_ckan_release_branch
-python setup.py develop
+python3 setup.py develop
 pip install -r requirements.txt --allow-all-external
 pip install -r dev-requirements.txt --allow-all-external
 cd -
@@ -33,7 +33,7 @@ paster db init -c test-core.ini
 cd -
 
 echo "Installing ckanext-lacounts and its requirements..."
-python setup.py develop
+python3 setup.py develop
 pip install -r dev-requirements.txt
 
 echo "Moving test.ini into a subdir..."
