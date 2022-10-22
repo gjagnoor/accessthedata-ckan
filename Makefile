@@ -1,9 +1,10 @@
 container = accessthedatacontainer
-app = accessthedata
-PORT = 8000
+app = accessthedata-ckan-1 
+# || 
+PORT = 3000
 
 dev: 
-	- docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d --build
+	- docker-compose -f docker-compose.yml -f docker-compose.dev.yml up --build -d
 
 prod: 
 	- docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d --build
@@ -15,7 +16,7 @@ list-containers:
 	- docker ps -a
 
 explore-image:
-	- docker exec -it ${container} bash
+	- docker exec -it ${app} bash
 
 container-logs:
 	- docker logs ${app}

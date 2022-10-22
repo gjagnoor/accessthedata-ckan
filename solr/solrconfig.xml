@@ -34,7 +34,7 @@
 		</updateLog>
 
 		<autoCommit>
-			<maxTime>${solr.autoCommit.maxTime:15000}</maxTime>
+			<maxTime>${solr.autoCommit.maxTime:13000}</maxTime>
 			<openSearcher>false</openSearcher>
 		</autoCommit>
 
@@ -70,7 +70,7 @@
 
 	<requestDispatcher handleSelect="false">
 
-		<requestParsers enableRemoteStreaming="true" multipartUploadLimitInKB="2048000" formdataUploadLimitInKB="2048" addHttpRequestToContext="false" />
+		<requestParsers enableRemoteStreaming="true" multipartUploadLimitInKB="2043000" formdataUploadLimitInKB="2048" addHttpRequestToContext="false" />
 		<httpCaching never304="true" />
 
 	</requestDispatcher>

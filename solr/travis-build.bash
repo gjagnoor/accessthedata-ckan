@@ -19,8 +19,8 @@ pip install -r dev-requirements.txt --allow-all-external
 cd -
 
 echo "Creating the PostgreSQL user and database..."
-sudo -u postgres psql -c "CREATE USER ckan_default WITH PASSWORD 'pass';"
-sudo -u postgres psql -c 'CREATE DATABASE ckan_test WITH OWNER ckan_default;'
+sudo -u postgres psql -c "CREATE USER ckan WITH PASSWORD 26487666Cal;"
+sudo -u postgres psql -c 'CREATE DATABASE ckan_test WITH OWNER ckan;'
 
 echo "SOLR config..."
 # Solr is multicore for tests on ckan master, but it's easier to run tests on
@@ -34,7 +34,7 @@ cd -
 
 echo "Installing ckanext-lacounts and its requirements..."
 python3 setup.py develop
-pip install -r dev-requirements.txt
+pip install -r requirements.txt
 
 echo "Moving test.ini into a subdir..."
 mkdir subdir

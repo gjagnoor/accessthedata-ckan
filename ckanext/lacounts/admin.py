@@ -9,7 +9,7 @@ from ckan.plugins import toolkit
 from ckan import model
 
 
-BASE_URL = toolkit.config.get('ckan.site_url', 'http://localhost:5000').rstrip('/')
+BASE_URL = toolkit.config.get('ckan.site_url', 'http://localhost:3000').rstrip('/')
 
 
 def _link(url, text):

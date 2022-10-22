@@ -1,54 +1,54 @@
 version: "3"
 
 services:
-  apache-app:
-    build: .
-    depends-on:
-      - database
-      - solr
-      - datapusher
-      - redis
+  nginx:
+    build:
+      context: nginx/
+      dockerfile: Dockerfile
+    depends_on:
       - ckan
+    ports:
+      - "0.0.0.0:443:443"
 
   database:
-    image: postgres:latest
-    ports: "5432:5432"
-    environment:
-      POSTGRES_PASSWORD: 26487666Cal
-      POSTGRES_USER: ckan
-      POSTGRES_DB: ckan
+    image: postgres:12
+    build: postgres/
+    ports:
+      - "5432:5432"
     volumes:
-      - ./init.sql:/postgres/docker-entrypoint-initdb.d/init.sql
+      - pg_data:/var/lib/postgresql/data
 
   solr:
-    image: solr:latest
-    build: solr/
+    image: ckan/solr
     ports:
-      - "8983:8983"
+      - "0.0.0.0:8983:8983"
     volumes:
       - ./travis-build.bash:/solr/travis-build.bash
 
   datapusher:
-    image: keitaro/datapusher
-    ports: "8800:8800"
-    volumes:
-      - ./init.py:/datapusher/init.py
+    image: clementmouchet/datapusher
 
   redis:
     image: redis:alpine
 
   ckan:
-    image: ckan/ckan
     build:
-      context: .
+      context: ckan/
       dockerfile: Dockerfile
-    depends-on:
+      args:
+        - TZ=${TZ}
+    env_file:
+      - .env
+    depends_on:
       - database
       - solr
-      - datapusher
       - redis
     ports:
-      - "5000:5000"
-    volumes:
-      - .:/srv/app/src_extensions
-      - ckan_storage:/var/lib/ckan
+      - "0.0.0.0:${CKAN_PORT}:5000"
+
+volumes:
+  ckan_config:
+  ckan_home:
+  ckan_storage:
+  pg_data:
+  solr_data:

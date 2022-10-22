@@ -16,10 +16,9 @@ do::
     python setup.py develop
     pip install -r requirements.txt
 
+## API (_Get Involved_ page actions)
 
-## API (*Get Involved* page actions)
-
-Actions for the *Get Involved* page are available in the CKAN Action API.
+Actions for the _Get Involved_ page are available in the CKAN Action API.
 
 **Event** actions:
 
@@ -36,28 +35,27 @@ Available parameters:
 A full example for `event_create`:
 
 ```sh
-$ curl -X POST http://127.0.0.1:5000/api/3/action/event_create -H "Authorization:{YOUR-API-KEY}" -d '{"name": "My New Event", "free": "yes", "date": "2019-01-21", "url": "http://example.com/event-details", "location": "Downton, Los Angeles", "topic_tags": ["Housing", "Employment"]}'
+$ curl -X POST http://127.0.0.1:3000/api/3/action/event_create -H "Authorization:{YOUR-API-KEY}" -d '{"name": "My New Event", "free": "yes", "date": "2019-01-21", "url": "http://example.com/event-details", "location": "Downton, Los Angeles", "topic_tags": ["Housing", "Employment"]}'
 ```
 
 All Event actions:
 
 ```sh
 # create a new event (sysadmins only)
-curl -X POST http://127.0.0.1:5000/api/3/action/event_create -H "Authorization:{YOUR-API-KEY}" -d '{"name": "My New Event", "free": "yes", "date": "2019-01-21"}'
+curl -X POST http://127.0.0.1:3000/api/3/action/event_create -H "Authorization:{YOUR-API-KEY}" -d '{"name": "My New Event", "free": "yes", "date": "2019-01-21"}'
 
 # update an existing event (sysadmins only)
-curl -X POST http://127.0.0.1:5000/api/3/action/event_update -H "Authorization:{YOUR-API-KEY}" -d '{"id": "my-event-id", "name": "My Updated Event", "free": "no", "date": "2020-01-21"}'
+curl -X POST http://127.0.0.1:3000/api/3/action/event_update -H "Authorization:{YOUR-API-KEY}" -d '{"id": "my-event-id", "name": "My Updated Event", "free": "no", "date": "2020-01-21"}'
 
 # delete an event (sysadmins only)
-curl -X POST http://127.0.0.1:5000/api/3/action/event_delete -H "Authorization:{YOUR-API-KEY}" -d '{"id": "my-event-id"}'
+curl -X POST http://127.0.0.1:3000/api/3/action/event_delete -H "Authorization:{YOUR-API-KEY}" -d '{"id": "my-event-id"}'
 
 # show an event
-curl http://127.0.0.1:5000/api/3/action/event_show -d '{"id": "my-event-id"}'
+curl http://127.0.0.1:3000/api/3/action/event_show -d '{"id": "my-event-id"}'
 
 # list events ``limit`` and ``offset`` are optional.
-curl http://127.0.0.1:5000/api/3/action/event_list -H "Authorization:{YOUR-API-KEY}" -d '{"limit":<int>, "offset":<int>}'
+curl http://127.0.0.1:3000/api/3/action/event_list -H "Authorization:{YOUR-API-KEY}" -d '{"limit":<int>, "offset":<int>}'
 ```
-
 
 ## Running the Tests
 
@@ -66,7 +64,7 @@ To run the tests, do::
     nosetests --nologcapture --with-pylons=test.ini
 
 To run the tests and produce a coverage report, first make sure you have
-coverage installed in your virtualenv (``pip install coverage``) then run::
+coverage installed in your virtualenv (`pip install coverage`) then run::
 
     nosetests --nologcapture --with-pylons=test.ini --with-coverage --cover-package=ckanext.lacounts --cover-inclusive --cover-erase --cover-tests
 
@@ -85,17 +83,17 @@ You can watch both for changes with `grunt`.
 ## Create initial data
 
 There are scripts defined in the `scripts` folder that create initial objects:
-* topics (groups)
-* harvest sources + publishers (organizations)
+
+- topics (groups)
+- harvest sources + publishers (organizations)
 
 To run them you'll need a sysadmin API key and the URL of the site to update (dev, staging or production). For instance:
 
-    python create_topics.py http://localhost:5000 API-KEY
+    python create_topics.py http://localhost:3000 API-KEY
 
     python create_source.py https://lacounts-staging.l3.ckan.io/ API-KEY
 
 Note: Some of them require extra libraries (eg slugify)
-
 
 ## Initialize 'Get Involved' database tables
 
