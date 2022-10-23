@@ -4,7 +4,8 @@ app = accessthedata-ckan-1
 PORT = 3000
 
 dev: 
-	- docker-compose -f docker-compose.yml -f docker-compose.dev.yml up --build -d
+	- docker-compose down -v
+	- docker-compose -f docker-compose.dev.yml up --build -d
 
 prod: 
 	- docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d --build
@@ -20,3 +21,7 @@ explore-image:
 
 container-logs:
 	- docker logs ${app}
+
+portlist:
+	- sudo lsof -i :80
+

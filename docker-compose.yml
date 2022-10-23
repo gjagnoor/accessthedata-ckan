@@ -8,13 +8,14 @@ services:
     depends_on:
       - ckan
     ports:
+      - "0.0.0.0:81:81"
       - "0.0.0.0:443:443"
 
   db:
-    image: postgres:12
     build:
-      context: postgres/
+      context: postgresql/
       args:
+        - POSTGRES_HOST=${POSTGRES_HOST}
         - DATASTORE_READONLY_PASSWORD=${DATASTORE_READONLY_PASSWORD}
         - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
     environment:
@@ -22,7 +23,7 @@ services:
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
       - PGDATA=/var/lib/postgresql/data/db
     ports:
-      - "5432:5432"
+      - "5432"
     volumes:
       - pg_data:/var/lib/postgresql/data
 
@@ -40,6 +41,7 @@ services:
     image: redis:alpine
 
   ckan:
+    container_name: ${CKAN_CONTAINER_NAME}
     build:
       context: ckan/
       dockerfile: Dockerfile
@@ -57,7 +59,6 @@ services:
       - ckan_config:/etc/ckan
       - ckan_home:/usr/lib/ckan
       - ckan_storage:/var/lib/ckan
-      - ./src:/srv/app/src_extensions
 
 volumes:
   ckan_config:
