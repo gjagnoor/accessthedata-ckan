@@ -1,6 +1,7 @@
 # encoding: utf-8
 
 # this is a namespace package
+print("NAMESPACE", __name__)
 try:
     import pkg_resources
     pkg_resources.declare_namespace(__name__)

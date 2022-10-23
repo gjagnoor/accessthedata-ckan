@@ -2,10 +2,14 @@ container = accessthedatacontainer
 app = accessthedata-ckan-1 
 # || 
 PORT = 3000
+# - docker-compose down -v
+# 	- docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d
 
+binn: 
+	- docker-compose -f docker-compose.dev.yml run --rm ckan bash
 dev: 
 	- docker-compose down -v
-	- docker-compose -f docker-compose.dev.yml up --build -d
+	- docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d
 
 prod: 
 	- docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d --build
@@ -25,3 +29,5 @@ container-logs:
 portlist:
 	- sudo lsof -i :80
 
+container: 
+	- docker-compose -f docker-compose.dev.yml run --rm ckan bash
