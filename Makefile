@@ -1,9 +1,7 @@
 container = accessthedatacontainer
 app = accessthedata-ckan-1 
 # || 
-PORT = 3000
-# - docker-compose down -v
-# 	- docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d
+PORT = 5000
 
 binn: 
 	- docker-compose -f docker-compose.dev.yml run --rm ckan bash

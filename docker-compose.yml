@@ -6,6 +6,8 @@ services:
     build:
       context: .
       dockerfile: images/ckan/Dockerfile.ckan
+      args:
+        - TZ=UTC
     ports:
       - 5000:5000
     depends_on:

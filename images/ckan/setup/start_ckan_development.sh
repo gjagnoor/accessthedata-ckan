@@ -36,7 +36,7 @@ do
         if [ -f $i/test.ini ];
         then
             echo "Updating \`test.ini\` reference to \`test-core.ini\` for plugin $i"
-            paster --plugin=ckan config-tool $i/test.ini "use = config:../../src/ckan/test-core.ini"
+            paster --plugin=ckan config-tool $i/test.ini "use = config:./test-core.ini"
         fi
     fi
 done
